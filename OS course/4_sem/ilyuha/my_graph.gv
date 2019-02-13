@@ -1,0 +1,9 @@
+digraph G{
+graph [dpi = 300]TreeNode_0x7346b0 [label="*\l"]
+TreeNode_0x735c30 [label="x\l"]
+TreeNode_0x7346b0 -> TreeNode_0x735c30
+TreeNode_0x7346b0 [label="*\l"]
+TreeNode_0x735d00 [label="2\l"]
+TreeNode_0x7346b0 -> TreeNode_0x735d00
+TreeNode_0x7346b0 [label="*\l"]
+}

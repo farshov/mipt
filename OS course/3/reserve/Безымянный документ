@@ -1,0 +1,61 @@
+if (errno == EAGAIN)
+            {
+                printf("EAGAIN\n");
+            }
+            if (errno == E2BIG)
+            {
+                printf("E2BIG\n");
+            }
+            if (errno == EINTR)
+            {
+                printf("EINTR\n");
+            }
+            if (errno == EIDRM)
+            {
+                printf("EIDRM\n");
+            }
+            if (errno == EFBIG)
+            {
+                printf("EFBIG\n");
+            }
+            if (errno == EFAULT)
+            {
+                printf("EFAULT\n");
+            }
+            if (errno == EAGAIN)
+            {
+                printf("EAGAIN\n");
+            }
+            if (errno == EACCES)
+            {
+                printf("EACCES\n");
+            } 
+            if (errno == EINVAL)
+            {
+                printf("EINVAL\n");
+            } 
+            if (errno == EINTR)
+            {
+                printf("EINTR\n");
+            } 
+            if (errno == EIDRM)
+            {
+                printf("EIDRM\n");
+            } 
+            if (errno == EFAULT)
+            {
+                printf("EFAULT\n");
+            } 
+            if (errno == EFBIG)
+            {
+                printf("EFBIG\n");
+            } 
+            if (errno == ERANGE)
+            {
+                printf("ERANGE\n");
+            }  
+            if (errno == ENOMEM)
+            {
+                printf("ENOMEM\n");
+            }  
+            printf("sem_id = %d\n", sem_id);

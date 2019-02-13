@@ -1,0 +1,195 @@
+        -:    0:Source:prog.c
+        -:    0:Graph:./prog.gcno
+        -:    0:Data:./prog.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include "prog.h"
+        -:    4:
+        -:    5:#define ERR_OK 0
+        -:    6:#define ERR_FAIL -1
+        -:    7:
+function array_init called 2 returned 100% blocks executed 67%
+        2:    8:array * array_init()
+        -:    9:{
+        2:   10:    array * res = calloc(1, sizeof(*res));
+        2:   11:    if(res == NULL)
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        -:   12:    {
+    #####:   13:        return NULL;
+        -:   14:    }
+        2:   15:    res->cap = 10;
+        2:   16:    res->head = calloc(res->cap, sizeof(int));
+        2:   17:    if(res->head == NULL)
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        -:   18:    {
+    #####:   19:        free(res);
+    #####:   20:        return NULL;
+        -:   21:    }
+        2:   22:    res->content = 0;
+        2:   23:    return res;
+        -:   24:}
+        -:   25:
+function array_is_empty called 26 returned 100% blocks executed 100%
+       26:   26:int array_is_empty(array * a)
+        -:   27:{
+       26:   28:    if(a->content == 0)
+branch  0 taken 15% (fallthrough)
+branch  1 taken 85%
+        -:   29:    {
+        4:   30:        return 1;
+        -:   31:    }
+        -:   32:    else
+        -:   33:    {
+       22:   34:        return 0;
+        -:   35:    }
+        -:   36:}
+        -:   37:
+function array_destructor called 2 returned 100% blocks executed 100%
+        2:   38:void array_destructor(array * a)
+        -:   39:{
+        2:   40:    free(a->head);
+        2:   41:    free(a);
+        2:   42:}
+        -:   43:
+function array_n_elem called 3 returned 100% blocks executed 100%
+        3:   44:int * array_n_elem(array * a, int n)
+        -:   45:{   
+        3:   46:    if(n < a->content)
+branch  0 taken 67% (fallthrough)
+branch  1 taken 33%
+        -:   47:    {
+        2:   48:        int * res = (a->head + n);
+        2:   49:        return res;
+        -:   50:    }
+        -:   51:    else 
+        -:   52:    {
+        1:   53:        return NULL;
+        -:   54:    }
+        -:   55:}
+        -:   56:
+function array_front called 2 returned 100% blocks executed 100%
+        2:   57:int * array_front(array * a)
+        -:   58:{
+        2:   59:    if(!array_is_empty(a))
+call    0 returned 100%
+branch  1 taken 50% (fallthrough)
+branch  2 taken 50%
+        -:   60:    {
+        1:   61:        int * res = (a->head);
+        1:   62:        return res;
+        -:   63:    }
+        -:   64:    else
+        -:   65:    {
+        1:   66:        return NULL;
+        -:   67:    }
+        -:   68:}
+        -:   69:
+function array_back called 2 returned 100% blocks executed 100%
+        2:   70:int * array_back(array * a)
+        -:   71:{
+        2:   72:    if(!array_is_empty(a))
+call    0 returned 100%
+branch  1 taken 50% (fallthrough)
+branch  2 taken 50%
+        -:   73:    {
+        1:   74:        int * res = (a->head + (a->content - 1));
+        1:   75:        return res;
+        -:   76:    }
+        -:   77:    else
+        -:   78:    {
+        1:   79:        return NULL;
+        -:   80:    }
+        -:   81:}
+        -:   82:
+function push_back called 30 returned 100% blocks executed 83%
+       30:   83:int push_back(array * a, int num)
+        -:   84:{
+       30:   85:    if(a->content < a->cap)
+branch  0 taken 93% (fallthrough)
+branch  1 taken 7%
+        -:   86:    {
+       28:   87:        *(a->head + a->content) = num;
+       28:   88:        a->content += 1;
+       28:   89:        return ERR_OK;
+        -:   90:    }
+        -:   91:    else
+        -:   92:    {
+        2:   93:        int * new_head = realloc(a->head, (a->cap * 2) * sizeof(int));
+        2:   94:        if(new_head == NULL)
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        -:   95:        {
+    #####:   96:            return ERR_FAIL;
+        -:   97:        }
+        2:   98:        a->cap = a->cap * 2;
+        2:   99:        a->head = new_head;
+        2:  100:        *(a->head + a->content) = num;
+        2:  101:        a->content += 1;
+        2:  102:        return ERR_OK;
+        -:  103:    }
+        -:  104:}
+        -:  105:
+function pop_back called 20 returned 100% blocks executed 100%
+       20:  106:int pop_back(array * a, int * value)
+        -:  107:{
+       20:  108:    if(!array_is_empty(a))
+call    0 returned 100%
+branch  1 taken 95% (fallthrough)
+branch  2 taken 5%
+        -:  109:    {
+       19:  110:        *value = * (a->head + (a->content - 1));
+       19:  111:        a->content -= 1;
+       19:  112:        return ERR_OK;
+        -:  113:    }
+        -:  114:    else
+        -:  115:    {
+        1:  116:        return ERR_FAIL;
+        -:  117:    }
+        -:  118:}
+        -:  119:
+function for_each called 1 returned 100% blocks executed 100%
+        1:  120:int for_each(array * a, int (*act)(int * obj, void* ctx), void* ctx)
+        -:  121:{
+        1:  122:    int i = 0;
+        6:  123:    for(i = 0; i < a->content; i++)
+branch  0 taken 83%
+branch  1 taken 17% (fallthrough)
+        -:  124:    {
+        5:  125:        act(a->head + i, ctx); 
+call    0 returned 100%
+        -:  126:    }
+        1:  127:    return ERR_OK;
+        -:  128:}
+        -:  129:
+function array_size called 1 returned 100% blocks executed 100%
+        1:  130:int array_size(array * a)
+        -:  131:{
+        1:  132:    return a->content;
+        -:  133:}
+        -:  134:
+function change_n_elem called 2 returned 100% blocks executed 100%
+        2:  135:int change_n_elem(array * a, int n, int x)
+        -:  136:{
+        2:  137:    if(n < a->content)
+branch  0 taken 50% (fallthrough)
+branch  1 taken 50%
+        -:  138:    {
+        1:  139:        *(a->head + n) = x;
+        1:  140:        return ERR_OK;
+        -:  141:    }
+        -:  142:    else 
+        -:  143:    {
+        1:  144:        return ERR_FAIL;
+        -:  145:    }
+        -:  146:}
+        -:  147:
+function array_clear called 1 returned 100% blocks executed 100%
+        1:  148:int array_clear(array * a)
+        -:  149:{
+        1:  150:    a->content = 0;
+        1:  151:    return ERR_OK;
+        -:  152:}
